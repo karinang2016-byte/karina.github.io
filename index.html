@@ -13,39 +13,23 @@
     <div class="game-container">
         <div class="score-board">
             <div class="score">分數: <span id="score">0</span></div>
-            <div class="high-score">最高分: <span id="high-score">0</span></div>
         </div>
+    </div>
 
-        <div class="game-area">
-            <canvas id="game-canvas" width="400" height="400"></canvas>
+    <div class="controls-hint">
+        使用方向鍵或滑動螢幕控制
+    </div>
 
-            <div id="start-screen" class="overlay">
-                <h1>貪吃蛇</h1>
-                <p>按任意鍵或點擊開始</p>
-                <button id="start-btn">開始遊戲</button>
-            </div>
-
-            <div id="game-over-screen" class="overlay hidden">
-                <h1>遊戲結束</h1>
-                <p>最終分數: <span id="final-score">0</span></p>
-                <button id="restart-btn">再玩一次</button>
-            </div>
+    <div class="touch-controls">
+        <div class="control-row">
+            <button id="btn-up" class="control-btn">▲</button>
         </div>
-
-        <div class="controls-hint">
-            使用方向鍵或滑動螢幕控制
+        <div class="control-row">
+            <button id="btn-left" class="control-btn">◀</button>
+            <button id="btn-down" class="control-btn">▼</button>
+            <button id="btn-right" class="control-btn">▶</button>
         </div>
-
-        <div class="touch-controls">
-            <div class="control-row">
-                <button id="btn-up" class="control-btn">▲</button>
-            </div>
-            <div class="control-row">
-                <button id="btn-left" class="control-btn">◀</button>
-                <button id="btn-down" class="control-btn">▼</button>
-                <button id="btn-right" class="control-btn">▶</button>
-            </div>
-        </div>
+    </div>
     </div>
 
     <script src="script.js"></script>

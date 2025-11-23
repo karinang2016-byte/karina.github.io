@@ -17,7 +17,7 @@ const btnRight = document.getElementById('btn-right');
 // Game constants
 const GRID_SIZE = 20;
 const TILE_COUNT = canvas.width / GRID_SIZE;
-const GAME_SPEED = 120; // Slightly slower for better control
+let GAME_SPEED = 100;
 
 // Assets
 const catImage = new Image();
@@ -114,6 +114,15 @@ document.addEventListener('touchend', (e) => {
 });
 
 function startGame() {
+    // Set speed based on difficulty
+    const difficulty = document.getElementById('difficulty').value;
+    switch (difficulty) {
+        case 'easy': GAME_SPEED = 150; break;
+        case 'normal': GAME_SPEED = 100; break;
+        case 'hard': GAME_SPEED = 60; break;
+        default: GAME_SPEED = 100;
+    }
+
     snake = [
         { x: 10, y: 10, hue: 0 },
         { x: 9, y: 10, hue: 30 },

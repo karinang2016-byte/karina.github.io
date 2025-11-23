@@ -154,6 +154,31 @@ button:hover {
     transform: scale(0.95);
 }
 
+.difficulty-select {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    color: #ff69b4;
+}
+
+select {
+    padding: 8px 15px;
+    font-size: 1rem;
+    border: 2px solid #ff69b4;
+    border-radius: 10px;
+    background: white;
+    color: #ff69b4;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    outline: none;
+}
+
+select:focus {
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+}
+
 @media (min-width: 768px) {
     .touch-controls {
         display: none;
