@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Kart Racer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui-layer">
+            <div id="score">SCORE: <span id="scoreValue">0</span></div>
+            <div id="speed">SPEED: <span id="speedValue">0</span> km/h</div>
+            <div id="lap">LAP: <span id="lapValue">1</span></div>
+            <div id="start-screen">
+                <h1>RETRO KART</h1>
+                <p>Press ENTER or Touch to Start</p>
+                <p>Arrow Keys to Drive</p>
+            </div>
+            <div id="touch-controls">
+                <div class="touch-row">
+                    <button id="btn-left" class="touch-btn">⬅️</button>
+                    <button id="btn-right" class="touch-btn">➡️</button>
+                </div>
+                <div class="touch-row">
+                    <button id="btn-brake" class="touch-btn">⬇️</button>
+                    <button id="btn-gas" class="touch-btn">⬆️</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+
+</html>

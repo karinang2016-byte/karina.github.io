@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #222;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    touch-action: none;
+    /* Prevent zoom/scroll on mobile */
+}
+
+#game-container {
+    position: relative;
+    width: 1024px;
+    height: 768px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    background-color: #000;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#score,
+#speed,
+#lap {
+    position: absolute;
+    font-size: 20px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+#score {
+    top: 20px;
+    left: 20px;
+}
+
+#speed {
+    top: 20px;
+    right: 20px;
+}
+
+#lap {
+    top: 50px;
+    left: 20px;
+}
+
+#start-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border: 4px solid white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    pointer-events: auto;
+    z-index: 10;
+}
+
+#start-screen h1 {
+    color: #ff0000;
+    text-shadow: 4px 4px 0 #000;
+    font-size: 48px;
+    margin: 0;
+}
+
+#start-screen p {
+    color: #fff;
+    font-size: 16px;
+    margin: 0;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Touch Controls */
+#touch-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+    pointer-events: auto;
+    opacity: 0.7;
+}
+
+.touch-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.touch-btn {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    touch-action: none;
+    cursor: pointer;
+}
+
+.touch-btn:active {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0.95);
+}
+
+/* Hide controls on desktop if preferred, but user asked for them so keep them visible or use media query */
+@media (min-width: 1025px) {
+    /* Optional: hide on large screens if desired, but keeping for now as requested */
+}
