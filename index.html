@@ -13,6 +13,30 @@
     <div class="game-container">
         <div class="score-board">
             <div class="score">分數: <span id="score">0</span></div>
+            <div class="high-score">最高分: <span id="high-score">0</span></div>
+        </div>
+
+        <div class="game-area">
+            <canvas id="game-canvas" width="400" height="400"></canvas>
+
+            <div id="start-screen" class="overlay">
+                <h1>貪吃蛇</h1>
+                <div class="difficulty-select">
+                    <label for="difficulty">難度:</label>
+                    <select id="difficulty">
+                        <option value="easy">簡單</option>
+                        <option value="normal" selected>普通</option>
+                        <option value="hard">困難</option>
+                    </select>
+                </div>
+                <button id="start-btn">開始遊戲</button>
+            </div>
+
+            <div id="game-over-screen" class="overlay hidden">
+                <h1>遊戲結束</h1>
+                <p>得分: <span id="final-score">0</span></p>
+                <button id="restart-btn">再玩一次</button>
+            </div>
         </div>
     </div>
 
@@ -29,7 +53,6 @@
             <button id="btn-down" class="control-btn">▼</button>
             <button id="btn-right" class="control-btn">▶</button>
         </div>
-    </div>
     </div>
 
     <script src="script.js"></script>
