@@ -1,297 +1,231 @@
 :root {
-    --primary-bg: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-    --glass-bg: rgba(255, 255, 255, 0.25);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-    --text-color: #333;
-    --accent-color: #ff9a9e;
-    --danger-color: #ff7675;
+    --primary-color: #ff6b6b;
+    --secondary-color: #feca57;
+    --bg-color: #f7f1e3;
+    --text-color: #2d3436;
+    --pizza-base-color: #f5d6a3;
+    --pizza-crust-color: #e1b12c;
 }
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
 }
 
 body {
     font-family: 'Outfit', sans-serif;
-    background: var(--primary-bg);
-    height: 100vh;
-    overflow: hidden;
+    background-color: var(--bg-color);
     color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-.app-container {
+.game-container {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 20px;
-    gap: 20px;
-}
-
-/* Glassmorphism Utilities */
-.glass-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    box-shadow: var(--glass-shadow);
-}
-
-.glass-btn {
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    padding: 10px 20px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.glass-btn:active {
-    transform: scale(0.95);
-    background: rgba(255, 255, 255, 0.6);
-}
-
-.glass-btn.danger {
-    color: #d63031;
-    border-color: rgba(214, 48, 49, 0.3);
-}
-
-/* Header */
-header {
-    display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    padding: 15px 25px;
-    height: 80px;
-    flex-shrink: 0;
+    padding: 20px;
 }
 
-h1 {
-    font-weight: 700;
-    color: #555;
+header {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-/* Game Area */
-.game-area {
-    flex: 1;
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    perspective: 1000px;
-    /* Enable 3D perspective */
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--primary-color);
 }
 
-.string-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    overflow-x: auto;
-    padding: 0 50px;
-    scrollbar-width: none;
-    transform-style: preserve-3d;
-}
-
-.string-container::-webkit-scrollbar {
-    display: none;
-}
-
-.string-line {
-    position: absolute;
-    width: max(100%, var(--string-width, 100%));
-    height: 4px;
-    background: #aaa;
-    border-radius: 2px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    left: 0;
-}
-
-.beads-on-string {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 100px;
-    z-index: 1;
-    min-width: 100%;
-    padding: 0 20px;
-    transform-style: preserve-3d;
-    /* Important for 3D children */
-}
-
-.bead-on-string {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 0 2px;
-    box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.2), 5px 5px 15px rgba(0, 0, 0, 0.1);
-    animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: grab;
-    flex-shrink: 0;
-    touch-action: none;
-    position: relative;
-    transform-style: preserve-3d;
-    /* Enable 3D for pseudo-elements */
-    transition: transform 0.1s ease-out;
-    /* Smooth rotation */
-}
-
-/* Bead Hole Visualization */
-.bead-on-string::before,
-.bead-on-string::after {
-    content: '';
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.bead-on-string::before {
-    transform: translate(-50%, -50%) translateZ(24px);
-    /* Front hole */
-}
-
-.bead-on-string::after {
-    transform: translate(-50%, -50%) translateZ(-24px);
-    /* Back hole */
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.bead-on-string.dragging {
+header p {
+    margin: 5px 0 0;
+    font-size: 1rem;
     opacity: 0.8;
-    cursor: grabbing;
-    z-index: 100;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: scale(0.5) translateY(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-/* Palette */
-.palette-container {
-    height: 120px;
-    padding: 10px;
+.main-area {
+    flex-grow: 1;
     display: flex;
+    justify-content: center;
     align-items: center;
-    flex-shrink: 0;
-}
-
-.palette-scroll {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    padding: 10px;
     width: 100%;
-    scrollbar-width: none;
+    position: relative;
 }
 
-.palette-scroll::-webkit-scrollbar {
-    display: none;
-}
-
-.bead-option {
-    width: 70px;
-    height: 70px;
+#pizza-base {
+    width: 300px;
+    height: 300px;
+    background: var(--pizza-base-color);
     border-radius: 50%;
-    flex-shrink: 0;
-    cursor: pointer;
-    box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.2), 5px 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 1s ease;
+    border: 10px solid var(--pizza-crust-color);
 }
 
-.bead-option:active {
-    transform: scale(0.9);
+#pizza-base.baked {
+    background: #e6c288;
+    border-color: #c08e18;
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 107, 107, 0.4);
 }
 
-/* Modal */
-.modal {
-    position: fixed;
+.cheese-layer {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 1;
-    transition: opacity 0.3s;
-}
-
-.modal.hidden {
-    opacity: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.0);
+    transition: background 1s ease;
     pointer-events: none;
 }
 
-.modal-content {
-    width: 90%;
-    max-width: 400px;
+#pizza-base.baked .cheese-layer {
+    background: rgba(255, 234, 167, 0.4);
+}
+
+#toppings-layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.topping-on-pizza {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    cursor: grab;
+    user-select: none;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.topping-on-pizza:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.controls-area {
+    width: 100%;
+    background: white;
     padding: 20px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.85);
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
 }
 
-.modal-content h2 {
-    text-align: center;
-    color: #444;
-}
-
-.color-picker-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    justify-items: center;
-}
-
-.color-option {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid transparent;
-    box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.color-option.selected {
-    border-color: #333;
-    transform: scale(1.1);
-}
-
-.modal-actions {
+#toppings-container {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-.modal-actions button {
-    flex: 1;
+.ingredient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.ingredient:active {
+    transform: scale(0.95);
+}
+
+.ingredient-visual {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 5px;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border-radius: 10px;
+    background: white;
+}
+
+.sauce-visual {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+}
+
+.cheese-visual {
+    background: linear-gradient(135deg, #feca57 0%, #f6b93b 100%);
+}
+
+.pepperoni-visual {
+    background: linear-gradient(135deg, #c23616 0%, #b33939 100%);
+    font-size: 2rem;
+}
+
+.mushroom-visual {
+    background: linear-gradient(135deg, #f8f9fa 0%, #dfe4ea 100%);
+}
+
+.ingredient span {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #555;
+}
+
+#bake-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    transition: transform 0.2s, background 0.2s;
+}
+
+#bake-btn:active {
+    transform: scale(0.95);
+}
+
+/* iPad/Tablet Specific Adjustments */
+@media (min-width: 768px) {
+    #pizza-base {
+        width: 450px;
+        height: 450px;
+    }
+
+    .topping-on-pizza {
+        width: 70px;
+        height: 70px;
+        font-size: 3.5rem;
+    }
+
+    .ingredient-visual {
+        width: 80px;
+        height: 80px;
+        font-size: 4rem;
+    }
 }
